@@ -14,12 +14,26 @@ export default class CreateTrade extends AbpBase{
         (this.$refs.tradeForm as any).validate(async (vaild:boolean)=>{
             if(vaild){
                 await this.$store.dispatch({
-                    type:''
-                })
+                    type:'trade/create',
+                    data:this.trade
+                });
+                 (this.$refs.tenantForm as any).resetFields();
+                    this.$emit('save-success');
+                    this.$emit('input',false);
             }
         })
         
     }
+     cancel(){
+            (this.$refs.tenantForm as any).resetFields();
+            this.$emit('input',false);
+        }
+        visibleChange(value:boolean){
+            if(!value){
+                this.$emit('input',value);
+            }
+        }
+       
 }
 </script>
 

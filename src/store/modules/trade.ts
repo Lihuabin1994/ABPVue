@@ -37,7 +37,7 @@ class TradeModule extends ListModule<TradeState,any,Trade>{
         },
         async get(context:ActionContext<TradeState,any>,payload:any){
             let reponse=await Ajax.get('/api/services/app/TradeService/Get?Id='+payload.id);
-            return reponse.data.result as Tenant;
+            return reponse.data.result as Trade;
         }
     };
     mutations={
