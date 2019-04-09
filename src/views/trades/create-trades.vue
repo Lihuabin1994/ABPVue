@@ -1,5 +1,13 @@
 <template>
-    
+    <div>
+        <Modal
+        :title="L('CreateNewTrade')"
+        :value="value"
+        @on-ok="save"
+        @on-visible-change="visibleChange">
+            <form ref="tradeForm"
+        </Modal>
+    </div>
 </template>
 <script lang="ts">
 import {Component,Vue,Inject,Prop,Watch}from 'vue-property-decorator';
@@ -33,7 +41,9 @@ export default class CreateTrade extends AbpBase{
                 this.$emit('input',value);
             }
         }
-       
+       TradeRule={
+           name:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('TradeName')),trigger:'blur'}],
+       }
 }
 </script>
 
