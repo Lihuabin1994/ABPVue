@@ -1,16 +1,16 @@
 import Entity from './entity'
 
 export default class Trade extends Entity<number>{
-    SequenceID:number;
-    AccountNo:string;
-    ProductCode:string;
-    SecType:string;
-    MMY:string;
-    PutCall:string;
-    StrikePx:number;
-    Side:string;
-    Qty:number;
-    Ccy:string;
-    Exchange:string;
-    AccountType:string;
+    accountNo:string;
+    productCode:string;
+    secType:string;
+    mmy:string;
+    putCall:string;
+    strikePx:number;
+    side:string;
+    qty:number;
+    ccy:string;
+    exchange:string;
+    accountType:string;
+    bizDate:Date;
 }
