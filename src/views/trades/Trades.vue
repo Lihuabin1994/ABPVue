@@ -5,17 +5,17 @@
                 <Form ref="queryForm" :label-width="100" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="8">
-                         <FormItem :label="L('AccountNo')+':'" style="width:100%">
+                         <FormItem :label="L('账户')+':'" style="width:60%">
                             <Input v-model="pagerequest.AccountNo"></Input>
                          </FormItem>
                         </Col>
                         <Col span="8">
-                            <FormItem :label="L('ProductCode')+':'" style="width:100%">
+                            <FormItem :label="L('产品代码')+':'" style="width:60%">
                                 <Input v-model="pagerequest.ProductCode"></Input>
                             </FormItem>
                         </Col> 
                          <Col span="8">
-                            <FormItem :label="L('SecType')+':'" style="width:100%">
+                            <FormItem :label="L('交易类型')+':'" style="width:60%">
                                 <!--Select should not set :value="'All'" it may not trigger on-change when first select 'NoActive'(or 'Actived') then select 'All'-->
                                 <Select :placeholder="L('Select')" @on-change="isSecTypChange">
                                     <Option value="">{{L('')}}</Option>
@@ -111,59 +111,60 @@
             this.getpage();
         }
         columns=[{
-            title:this.L('BizDate'),
+            title:this.L('清算日'),
             key:'bizDate',
              render:(h:any,params:any)=>{
                 return h('span',new Date(params.row.bizDate).toLocaleDateString())
             }
         },{
-            title:this.L('AccountNo'),
+            title:this.L('账户'),
             key:'accountNo'
-        },{
-            title:this.L('ProductCode'),
+        },
+        {
+            title:this.L('账户类型'),
+            key:'accountType'
+        },
+        {
+            title:this.L('交易所'),
+            key:'exchange'
+        }
+        ,{
+            title:this.L('产品代码'),
             key:'productCode'
         },
         {
-            title:this.L('SecType'),
+            title:this.L('交易类型'),
             key:'secType',
             render:(h:any,params:any)=>{
                 return h('span',params.row.secType==='FUT'?this.L('Futuers'):this.L('Option'))
             }
         },
         {
-            title:this.L('MMY'),
+            title:this.L('合约'),
             key:'mmy'
         },
         {
-            title:this.L('PutCall'),
+            title:this.L('涨跌'),
             key:'putCall'
         },
         {
-            title:this.L('StrikePx'),
+            title:this.L('执行价格'),
             key:'strikePx'
         },
         {
-            title:this.L('Side'),
+            title:this.L('买卖'),
             key:'side',
             render:(h:any,params:any)=>{
                 return h('span',params.row.side==='1'?this.L('Buy'):this.L('Sell'));
             }
         },
         {
-            title:this.L('Qty'),
+            title:this.L('数量'),
             key:'qty'
         },
         {
-            title:this.L('Ccy'),
+            title:this.L('币种'),
             key:'ccy'
-        },
-        {
-            title:this.L('Exchange'),
-            key:'exchange'
-        },
-        {
-            title:this.L('AccountType'),
-            key:'accountType'
         },{
             title:this.L('Actions'),
             key:'Actions',
