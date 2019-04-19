@@ -37,6 +37,8 @@
                 </div>
             </div>
         </Card>
+         <create-trade v-model="createModalShow" @save-success="getpage"></create-trade>
+        <edit-trade v-model="editModalShow" @save-success="getpage"></edit-trade>
     </div>
 
  </template>
