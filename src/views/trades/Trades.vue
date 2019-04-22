@@ -77,13 +77,7 @@
               this.createModalShow=true;
           }
           isSecTypChange(val:string){
-              if(val==='Futuers'){
-                  this.pagerequest.SecType='FUT';
-              }else if(val==='Option'){
-                  this.pagerequest.SecType='OOF';
-              }else{
-                  this.pagerequest.SecType=null;
-              }
+              this.pagerequest.SecType=val;
           }
           pageChange(page:number){
               this.$store.commit('trade/setCurrentPage',page)

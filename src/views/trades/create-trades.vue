@@ -9,7 +9,7 @@
          >
            <Form ref="tradeForm"  :rules="tradeRule" :label-width="70" :model="trade" inline>
               <FormItem :label="L('清算日')" prop='bizDate'  >
-                    <DatePicker  v-model="trade.bizDate"  format="yyyy-MM-dd"  placement="bottom-end" :placeholder="L('SelectDate')"></DatePicker>
+                    <DatePicker  v-model="trade.bizDate"  format="yyyy-MM-dd" style="width:162px;"placement="bottom-end" :placeholder="L('SelectDate')"></DatePicker>
                </FormItem>
               <FormItem :label="L('交易所')" prop='exchange' >
                    <Input v-model="trade.exchange" :maxlength="32" :minlength="2"></Input>
@@ -18,23 +18,26 @@
                    <Input v-model="trade.accountNo" :maxlength="32" :minlength="2"></Input>
                </FormItem>
                <FormItem :label="L('账户类型')" prop='accountType'  >
-                    <Select :placeholder="L('Select')" v-model="trade.accountType" >
-                      <Option value="O">{{L('Omnibus')}}</Option>
+                    <Select :placeholder="L('Select')" v-model="trade.accountType" style="width:162px;" >
+                      <Option value="O" selected>{{L('Omnibus')}}</Option>
                       <Option value="S">{{L('Speculation')}}</Option>
                    </Select>
+               </FormItem>
+                <FormItem :label="L('产品代码')" prop='productCode' >
+                   <Input v-model="trade.productCode" :maxlength="4" :minlength="4"></Input>
                </FormItem>
                 <FormItem :label="L('合约')" prop='mmy' >
                    <Input v-model="trade.mmy" :maxlength="4" :minlength="4"></Input>
                </FormItem>
                <FormItem :label="L('交易类型')" prop='secType' >
-                    <Select :placeholder="L('Select')" v-model="trade.secType" >
-                      <Option value="FUT">{{L('Futuers')}}</Option>
+                    <Select :placeholder="L('Select')" v-model="trade.secType" style="width:162px;">
+                      <Option value="FUT" selected>{{L('Futuers')}}</Option>
                       <Option value="OOF">{{L('Option')}}</Option>
                    </Select>
                </FormItem>
                <FormItem :label="L('买卖')" prop='side' >
-                 <Select :placeholder="L('Select')" v-model="trade.side">
-                      <Option value="1">{{L('Buy')}}</Option>
+                 <Select :placeholder="L('Select')" v-model="trade.side" style="width:162px;">
+                      <Option value="1" selected>{{L('Buy')}}</Option>
                       <Option value="2">{{L('Sell')}}</Option>
                    </Select>
                </FormItem>
@@ -46,7 +49,7 @@
                    <Input v-model="trade.ccy" :maxlength="10" :minlength="0"></Input>
                </FormItem>
                 <FormItem :label="L('涨跌')" prop='putCall' >
-                    <Select :placeholder="L('Select')" v-model="trade.putCall" >
+                    <Select :placeholder="L('Select')" v-model="trade.putCall" style="width:162px;">
                       <Option value="">{{L('')}}</Option>
                       <Option value="P">{{L('Put')}}</Option>
                       <Option value="C">{{L('Call')}}</Option>
@@ -108,14 +111,10 @@ export default class CreateTrade extends AbpBase{
         ccy:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('ccy')),trigger:'blur'}],
         exchange:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('exchange')),trigger:'blur'}],
         accountType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('accountType')),trigger:'blur'}],
-        bizDate:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('bizDate')),trigger:'blur'}],
+        bizDate:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('bizDate')),trigger:'blur',pattern: /.+/}]
     }
 }
 </script>
-<style scoped>
-.ivu-form-item-content{
-    width:162px;
-}
-</style>
+
 
 
