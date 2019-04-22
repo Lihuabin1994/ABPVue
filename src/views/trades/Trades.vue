@@ -196,7 +196,7 @@
                                     cancelText:this.L('No'),
                                     onOk:async()=>{
                                         await this.$store.dispatch({
-                                            type:'Trade/delete',
+                                            type:'trade/delete',
                                             data:params.row
                                         })
                                         await this.getpage();

@@ -15,7 +15,7 @@ class TradeModule extends ListModule<TradeState,any,Trade>{
         pageSize:10,
         list:new Array<Trade>(),
         loading:false,
-        editTenant:new Trade()
+        editTrade:new Trade()
     };
     actions={
         async getAll(context:ActionContext<TradeState,any>,payload:any){
