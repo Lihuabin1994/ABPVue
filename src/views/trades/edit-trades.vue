@@ -104,16 +104,16 @@ export default class EditTrade extends AbpBase {
             }
         }
         tradeRule={
-        accountNo:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('accountNo')),trigger:'blur'}],
+         accountNo:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('accountNo')),trigger:'blur'}],
         productCode:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('productCode')),trigger:'blur'}],
-        secType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('secType')),trigger:'blur'}],
+        secType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('secType')),trigger:'change'}],
         mmy:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('mmy')),trigger:'blur'}],
-        side:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('side')),trigger:'blur'}],
+        side:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('side')),trigger:'change'}],
         qty:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('qty')),trigger:'blur'}],
         ccy:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('ccy')),trigger:'blur'}],
         exchange:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('exchange')),trigger:'blur'}],
-        accountType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('accountType')),trigger:'blur'}],
-        bizDate:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('bizDate')),trigger:'blur',pattern: /.+/}]
+        accountType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('accountType')),trigger:'change'}],
+        bizDate:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('bizDate')),trigger:'change',pattern: /.+/}]
     }
 }
 </script>
