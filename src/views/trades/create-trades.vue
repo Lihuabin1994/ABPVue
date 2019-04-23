@@ -19,7 +19,7 @@
                </FormItem>
                <FormItem :label="L('账户类型')" prop='accountType'  >
                     <Select :placeholder="L('Select')" v-model="trade.accountType" style="width:162px;" >
-                      <Option value="O" selected>{{L('Omnibus')}}</Option>
+                      <Option value="O" >{{L('Omnibus')}}</Option>
                       <Option value="S">{{L('Speculation')}}</Option>
                    </Select>
                </FormItem>
@@ -30,14 +30,14 @@
                    <Input v-model="trade.mmy" :maxlength="4" :minlength="4"></Input>
                </FormItem>
                <FormItem :label="L('交易类型')" prop='secType' >
-                    <Select :placeholder="L('Select')" v-model="trade.secType" style="width:162px;">
-                      <Option value="FUT" selected>{{L('Futuers')}}</Option>
+                    <Select :placeholder="L('Select')" v-model="trade.secType" style="width:162px;" @on-change="isSecTypChange">
+                      <Option value="FUT" >{{L('Futuers')}}</Option>
                       <Option value="OOF">{{L('Option')}}</Option>
                    </Select>
                </FormItem>
                <FormItem :label="L('买卖')" prop='side' >
                  <Select :placeholder="L('Select')" v-model="trade.side" style="width:162px;" >
-                      <Option value="1" selected>{{L('Buy')}}</Option>
+                      <Option value="1" >{{L('Buy')}}</Option>
                       <Option value="2">{{L('Sell')}}</Option>
                    </Select>
                </FormItem>
@@ -49,14 +49,13 @@
                    <Input v-model="trade.ccy" :maxlength="10" :minlength="0"></Input>
                </FormItem>
                 <FormItem :label="L('涨跌')" prop='putCall' >
-                    <Select :placeholder="L('Select')" v-model="trade.putCall" style="width:162px;">
-                      <Option value="">{{L('')}}</Option>
+                    <Select :placeholder="L('Select')" v-model="trade.putCall" style="width:162px;" :disabled="st">
                       <Option value="P">{{L('Put')}}</Option>
                       <Option value="C">{{L('Call')}}</Option>
                    </Select>
                </FormItem>
                 <FormItem :label="L('执行价格')" prop='strikePx' >
-                   <Input type="number" v-model="trade.strikePx" :maxlength="10" :minlength="0"></Input>
+                   <Input type="number" v-model="trade.strikePx" :maxlength="10" :minlength="0" :disabled="st"></Input>
                </FormItem>
                 
               
@@ -74,11 +73,13 @@
  import Util from '../../lib/util'
  import AbpBase from '../../lib/abpbase'
  import Trade from '@/store/entities/trade';
+import tradeModule from '../../store/modules/trade';
 
  @Component
 export default class CreateTrade extends AbpBase{
     @Prop({type:Boolean,default:false})value:boolean;
     trade:Trade=new Trade();
+     st:boolean=true;
     save(){
         (this.$refs.tradeForm as any).validate(async (valid:boolean)=>{
             if(valid){
@@ -92,6 +93,26 @@ export default class CreateTrade extends AbpBase{
             }
         })
     }
+    isSecTypChange(val:string){
+        if(val==="FUT"){
+            this.st=true;
+            (this.$refs.tradeForm as any).fields.forEach(function(e){
+                  if(e.prop==="putCall"||e.prop==="strikePx"){
+                      e.resetField();
+                  }
+           });
+            this.tradeRule['putCall']=[{required:false,message:this.L('FieldIsRequired',undefined,this.L('putCall')),trigger:'change',pattern: /.+/}];
+            this.tradeRule['strikePx']=[{required:false,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur'}];
+          
+          
+        }else if(val==="OOF")
+        {
+            this.st=false;
+            this.tradeRule['putCall']=[{required:true,message:this.L('FieldIsRequired',undefined,this.L('putCall')),trigger:'change',pattern: /.+/}];
+            this.tradeRule['strikePx']=[{required:true,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur'}];
+           
+        }
+    }
     cancel(){
         (this.$refs.tradeForm as any).resetFields();
         this.$emit('input',false);
@@ -101,17 +122,21 @@ export default class CreateTrade extends AbpBase{
             this.$emit('input',value);
         }
     }
+  
+
     tradeRule={
         accountNo:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('accountNo')),trigger:'blur'}],
         productCode:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('productCode')),trigger:'blur'}],
         secType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('secType')),trigger:'change'}],
         mmy:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('mmy')),trigger:'blur'}],
         side:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('side')),trigger:'change'}],
-        qty:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('qty')),trigger:'blur'}],
+        qty:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('qty')),trigger:'blur',type:'number'}],
         ccy:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('ccy')),trigger:'blur'}],
         exchange:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('exchange')),trigger:'blur'}],
         accountType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('accountType')),trigger:'change'}],
-        bizDate:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('bizDate')),trigger:'change',pattern: /.+/}]
+        bizDate:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('bizDate')),trigger:'change',pattern: /.+/}],
+        putCall:[{required:false,message:this.L('FieldIsRequired',undefined,this.L('putCall')),trigger:'change',pattern: /.+/}],
+        strikePx:[{required:false,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur'}]
     }
 }
 </script>
