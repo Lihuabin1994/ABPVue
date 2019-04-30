@@ -51,7 +51,7 @@ export const appRouters=[{
     icon:'&#xe68a;',
     component:main,
     children:[
-        {path: 'Orders',permission:'Pages.Trades', meta:{title:'Orders'},icon:'&#xe720;', name: 'Orders', component:()=>import('../views/trades/Trades.vue')},
+        {path: 'Orders',permission:'Pages.Trades', meta:{title:'Orders'},icon:'&#xe720;', name: 'Orders', component:()=>import('../views/trades/trades.vue')},
          ]
 }]
 export const tt=[{
@@ -62,7 +62,7 @@ export const tt=[{
     icon:'&#xe68a;',
     component:main,
     children:[
-        {path: 'trades',permission:'Pages.Trades', meta:{title:'Trade'},icon:'&#xe720;', name: 'trade', component:()=>import('../views/trades/Trades.vue')},
+        {path: 'trades',permission:'Pages.Trades', meta:{title:'Trade'},icon:'&#xe720;', name: 'trade', component:()=>import('../views/trades/trades.vue')},
          ]
 }]
 export const routers = [
