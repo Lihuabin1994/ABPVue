@@ -80,8 +80,7 @@ export default class EditTrade extends AbpBase {
       st:boolean=this.trade.secType=="FUT"?true:false;
       save(){
           (this.$refs.tradeForm as any).validate(async (valid:boolean)=>{
-              console.log(this.$refs.tradeForm["qty"]);
-              console.log(this.$refs.tradeForm["ccy"]);
+            
               if(valid){
                   await this.$store.dispatch({
                       type:'trade/update',
@@ -106,14 +105,14 @@ export default class EditTrade extends AbpBase {
                   }
            });
             this.tradeRule['putCall']=[{required:false,message:this.L('FieldIsRequired',undefined,this.L('putCall')),trigger:'change',pattern: /.+/}];
-            this.tradeRule['strikePx']=[{required:false,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur'}];
+            this.tradeRule['strikePx']=[{required:false,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur',pattern: /.+/}];
           
           
         }else if(val==="OOF")
         {
             this.st=false;
             this.tradeRule['putCall']=[{required:true,message:this.L('FieldIsRequired',undefined,this.L('putCall')),trigger:'change',pattern: /.+/}];
-            this.tradeRule['strikePx']=[{required:true,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur'}];
+            this.tradeRule['strikePx']=[{required:true,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur',pattern: /.+/}];
            
         }
     }
@@ -130,13 +129,13 @@ export default class EditTrade extends AbpBase {
         secType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('secType')),trigger:'change'}],
         mmy:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('mmy')),trigger:'blur'}],
         side:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('side')),trigger:'change'}],
-        qty:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('qty')),trigger:'blur',type:'number'}],
+        qty:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('qty')),trigger:'blur',pattern: /.+/}],
         ccy:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('ccy')),trigger:'blur'}],
         exchange:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('exchange')),trigger:'blur'}],
         accountType:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('accountType')),trigger:'change'}],
         bizDate:[{required:true,message:this.L('FieldIsRequired',undefined,this.L('bizDate')),trigger:'change',pattern: /.+/}],
         putCall:[{required:false,message:this.L('FieldIsRequired',undefined,this.L('putCall')),trigger:'change',pattern: /.+/}],
-        strikePx:[{required:false,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur'}]
+        strikePx:[{required:false,message:this.L('FieldIsRequired',undefined,this.L('strikePx')),trigger:'blur',pattern: /.+/}]
     
     }
 }
